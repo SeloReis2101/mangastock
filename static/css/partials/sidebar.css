@@ -1,0 +1,178 @@
+:root {
+    /* ========== Colors ==========
+    --first-color: var(--bg-color-2);
+    --black-color: hsl(248, 24%, 10%);
+    --white-color: #fff;
+    --body-color: #111;
+    /*========== Font and typography ========== */
+    /* --body-font: "Poppins", sans-serif; */
+    --small-font-size: .813rem;
+  }
+  @media screen and (min-width: 1024px) {
+    :root {
+      --small-font-size: .875rem;
+    }
+  }
+/*   
+  =============== BASE ===============
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  
+  body {
+    font-family: var(--body-font);
+    background-color: hsl(248, 24%, 10%);
+    color: white;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  main {
+    
+  }
+   */
+  /*=============== SIDEBAR ===============*/
+  .nav {
+    width: 72px;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    z-index: 99;
+    margin: auto 0;
+    transition: 0.4s;
+    transform: translateX(-51px) translateY(-50%);
+  }
+  .nav::before, .nav::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    height: 36px;
+    width: 72px;
+    left: 0px;
+  }
+  .nav::before {
+    top: 0;
+    border-radius: 0 0 50px 0;
+    box-shadow: 30px 1px 0 0 var(--bg-color-2);
+    transform: rotate(90deg) translateY(50%) translateX(-75%);
+  }
+  .nav::after {
+    bottom: 0;
+    border-radius: 0 50px 0 0;
+    box-shadow: 30px -1px 0 0 var(--bg-color-2);
+    transform: rotate(-0.25turn) translateY(-50%) translateX(-75%);
+  }
+  .nav.active {
+      transform: translateX(0px) translateY(-50%);
+  }
+  .nav .toggle-btn {
+      border-radius: 10px;
+      rotate: 45deg;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.2);
+      background-color: var(--accent-color-1);
+      backdrop-filter: blur(50px);
+      position: absolute;
+      z-index: 2;
+      left: calc(100% - 12.5px);
+      top: 50%;
+      padding: 2px;
+      cursor: pointer;
+  }
+  .nav .toggle-btn svg {
+      rotate: -45deg;
+      width: 20px;
+      height: 20px;
+      object-position: center;
+      transition: 0.4s;
+  }
+  .nav.active .toggle-btn svg {
+      transform: rotate(-180deg);
+  }
+  .nav__list {
+    position: relative;
+    background-color: var(--bg-color-2);
+    padding-block: 70px;
+    border-radius: 0 50px 50px 0;
+    display: grid;
+    justify-content: center;
+    row-gap: 2rem;
+  }
+  .nav__link {
+    position: relative;
+    display: inline-flex;
+    padding: 4px;
+    border-radius: 12px;
+    transition: 0.4s;
+  }
+  .nav__link svg {
+    width: 20px;
+    height: 20px;
+    color: white;
+    transition: color 0.4s;
+  }
+  .nav__link:hover .nav__name {
+    opacity: 1;
+    transform: translateX(48px);
+  }
+  .nav__name {
+    position: absolute;
+    top: 0;
+    transform: translateX(56px);
+    background-color: rgba(0,0,0,0.1);
+    color: white;
+    font-size: var(--small-font-size);
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 10px;
+    pointer-events: none;
+    transition: transform 0.5s, opacity 0.5s;
+    opacity: 0;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  /* .nav__circle-1, .nav__circle-2 {
+    width: 80px;
+    height: 80px;
+    background: var(--bg-color-1);
+    border-radius: 50%;
+    position: absolute; 
+    left: 0;
+    z-index: 10;
+  }
+  .nav__circle-1 {
+    top: -78px;
+  }
+  .nav__circle-2 {
+    bottom: -78px;
+  }
+  .nav__square-1, .nav__square-2 {
+    width: 35px;
+    height: 40px;
+    background-color: var(--bg-color-2);
+    position: absolute;
+    left: 0;
+    z-index: 1;
+  }
+  .nav__square-1 {
+    top: -39px;
+  }
+  .nav__square-2 {
+    bottom: -39px;
+  } */
+  
+  /* Active link */
+  .active-link {
+    background-color: var(--accent-color-1);
+  }
+  .active-link svg {
+    color: white;
+  }

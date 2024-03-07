@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'Righteous';
+    src: url('../font_righteous.ttf');
+}
+*, body {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: #111;
+    color: white;
+    font-family: 'Righteous';
+    user-select: none;
+}
+
+body[data-theme="blue"] {
+    --one-color: #74B0E2;
+    --two-color: #3F4A8C;
+    --three-color: #0A4E97;
+}
+
+body[data-theme="purple"] {
+    --one-color: #8A7EDA;
+    --two-color: #5E6092;
+    --three-color: #2F3273;
+}
+
+body[data-theme="green"] {
+    --one-color: #6DBD87;
+    --two-color: #356648;
+    --three-color: #07491E;
+}
+
+body[data-theme="red"] {
+    --one-color: #E75D5D;
+    --two-color: #8C2F2F;
+    --three-color: #4F1414;
+}
+
+body[data-theme="orange"] {
+    --one-color: #E28555;
+    --two-color: #7E4E38;
+    --three-color: #472C1D;
+}
+
+body[data-theme="yellow"] {
+    --one-color: #F6CC4D;
+    --two-color: #A4862E;
+    --three-color: #5C4B17;
+}
+
+body[data-theme="pink"] {
+    --one-color: #E27EA2;
+    --two-color: #9B4C64;
+    --three-color: #6E3453;
+}
+
+body[data-theme="teal"] {
+    --one-color: #4EB5A2;
+    --two-color: #2E8276;
+    --three-color: #0E4C46;
+}
+
+body[data-theme="brown"] {
+    --one-color: #996C48;
+    --two-color: #654628;
+    --three-color: #402F1A;
+}
+
+body[data-theme="gold"] {
+    --one-color: #DAA520;
+    --two-color: #B8860B;
+    --three-color: #FFD700;
+}
+
+.content-box {
+    width: 100vw;
+}

@@ -1,0 +1,785 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static './css/anime-detail.css' %}">
+    <link rel="stylesheet" href="{% static './css/partials/anime-section.css' %}">
+    <link rel="stylesheet" href="{% static './css/partials/rating-star.css' %}">
+    <link rel="stylesheet" href="{% static './css/comment.css' %}">
+    <link rel="stylesheet" href="{% static './css/partials/chapter-box.css' %}">
+{% endblock %}
+{% block body %}
+    <div class="main">
+        <div class="section-box">
+            <section class="first-section">
+                <img src="{{manga.cover_image.url}}" class="cover-image">
+                <div class="content">
+                    <div class="desc-box">
+                        <div class="author">
+                            {{manga.author}}
+                        </div>
+                        <div class="sep"></div>
+                        <div class="title">
+                            {{manga.title}}
+                        </div>
+                    </div>
+                    <div class="action-box">
+                        <div class="action">
+                            <i class="fas fa-share-nodes"></i>
+                        </div>
+                        <div class="action">
+                            <i class="fa-regular fa-heart"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="second-section">
+                <div class="desc-box">
+                    <div class="content">
+                        {{manga.description|safe}}
+                        <div class="arrow">
+                            <svg fill="currentColor" opacity="1.0" width="24" height="24" viewBox="0 0 24 24"><path d="M7.406 15.422L6 14.016l6-6 6 6-1.406 1.406L12 10.828z" /></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper genres-box">
+                    <div class="swiper-wrapper">
+                        {% for genre in manga.genres.all %}
+                        <a href="{% url 'mangas_by_genre' genre.slug %}" class="swiper-slide genre" style="color: inherit;text-decoration: none;">
+                            {{genre.name}}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="features-box">
+                    <div class="feature mid">
+                        <div class="title">
+                            Status
+                        </div>
+                        <div class="subtitle">
+                            Completed
+                        </div>
+                    </div>
+                    <div class="feature big">
+                        <div class="title">
+                            Publisher
+                        </div>
+                        <div class="subtitle">
+                            Studio Name
+                        </div>
+                    </div>
+                    <div class="feature mid">
+                        <div class="title">
+                            Published
+                        </div>
+                        <div class="subtitle">
+                            2015
+                        </div>
+                    </div>
+                </div>
+                <div class="feedback">
+                    <div class="rating">
+                        <input type="radio" name="rating" id="rating-5">
+                        <label for="rating-5"></label>
+                        <input type="radio" name="rating" id="rating-4">
+                        <label for="rating-4"></label>
+                        <input type="radio" name="rating" id="rating-3">
+                        <label for="rating-3"></label>
+                        <input type="radio" name="rating" id="rating-2">
+                        <label for="rating-2"></label>
+                        <input type="radio" name="rating" id="rating-1">
+                        <label for="rating-1"></label>
+                        <div class="emoji-wrapper">
+                            <div class="emoji">
+                                <svg class="rating-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <circle cx="256" cy="256" r="256" fill="#ffd93b" />
+                                    <path d="M512 256c0 141.44-114.64 256-256 256-80.48 0-152.32-37.12-199.28-95.28 43.92 35.52 99.84 56.72 160.72 56.72 141.36 0 256-114.56 256-256 0-60.88-21.2-116.8-56.72-160.72C474.8 103.68 512 175.52 512 256z" fill="#f4c534" />
+                                    <ellipse transform="scale(-1) rotate(31.21 715.433 -595.455)" cx="166.318" cy="199.829" rx="56.146" ry="56.13" fill="#fff" />
+                                    <ellipse transform="rotate(-148.804 180.87 175.82)" cx="180.871" cy="175.822" rx="28.048" ry="28.08" fill="#3e4347" />
+                                    <ellipse transform="rotate(-113.778 194.434 165.995)" cx="194.433" cy="165.993" rx="8.016" ry="5.296" fill="#5a5f63" />
+                                    <ellipse transform="scale(-1) rotate(31.21 715.397 -1237.664)" cx="345.695" cy="199.819" rx="56.146" ry="56.13" fill="#fff" />
+                                    <ellipse transform="rotate(-148.804 360.25 175.837)" cx="360.252" cy="175.84" rx="28.048" ry="28.08" fill="#3e4347" />
+                                    <ellipse transform="scale(-1) rotate(66.227 254.508 -573.138)" cx="373.794" cy="165.987" rx="8.016" ry="5.296" fill="#5a5f63" />
+                                    <path d="M370.56 344.4c0 7.696-6.224 13.92-13.92 13.92H155.36c-7.616 0-13.92-6.224-13.92-13.92s6.304-13.92 13.92-13.92h201.296c7.696.016 13.904 6.224 13.904 13.92z" fill="#3e4347" />
+                                </svg>
+                                <svg class="rating-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <circle cx="256" cy="256" r="256" fill="#ffd93b" />
+                                    <path d="M512 256A256 256 0 0 1 56.7 416.7a256 256 0 0 0 360-360c58.1 47 95.3 118.8 95.3 199.3z" fill="#f4c534" />
+                                    <path d="M328.4 428a92.8 92.8 0 0 0-145-.1 6.8 6.8 0 0 1-12-5.8 86.6 86.6 0 0 1 84.5-69 86.6 86.6 0 0 1 84.7 69.8c1.3 6.9-7.7 10.6-12.2 5.1z" fill="#3e4347" />
+                                    <path d="M269.2 222.3c5.3 62.8 52 113.9 104.8 113.9 52.3 0 90.8-51.1 85.6-113.9-2-25-10.8-47.9-23.7-66.7-4.1-6.1-12.2-8-18.5-4.2a111.8 111.8 0 0 1-60.1 16.2c-22.8 0-42.1-5.6-57.8-14.8-6.8-4-15.4-1.5-18.9 5.4-9 18.2-13.2 40.3-11.4 64.1z" fill="#f4c534" />
+                                    <path d="M357 189.5c25.8 0 47-7.1 63.7-18.7 10 14.6 17 32.1 18.7 51.6 4 49.6-26.1 89.7-67.5 89.7-41.6 0-78.4-40.1-82.5-89.7A95 95 0 0 1 298 174c16 9.7 35.6 15.5 59 15.5z" fill="#fff" />
+                                    <path d="M396.2 246.1a38.5 38.5 0 0 1-38.7 38.6 38.5 38.5 0 0 1-38.6-38.6 38.6 38.6 0 1 1 77.3 0z" fill="#3e4347" />
+                                    <path d="M380.4 241.1c-3.2 3.2-9.9 1.7-14.9-3.2-4.8-4.8-6.2-11.5-3-14.7 3.3-3.4 10-2 14.9 2.9 4.9 5 6.4 11.7 3 15z" fill="#fff" />
+                                    <path d="M242.8 222.3c-5.3 62.8-52 113.9-104.8 113.9-52.3 0-90.8-51.1-85.6-113.9 2-25 10.8-47.9 23.7-66.7 4.1-6.1 12.2-8 18.5-4.2 16.2 10.1 36.2 16.2 60.1 16.2 22.8 0 42.1-5.6 57.8-14.8 6.8-4 15.4-1.5 18.9 5.4 9 18.2 13.2 40.3 11.4 64.1z" fill="#f4c534" />
+                                    <path d="M155 189.5c-25.8 0-47-7.1-63.7-18.7-10 14.6-17 32.1-18.7 51.6-4 49.6 26.1 89.7 67.5 89.7 41.6 0 78.4-40.1 82.5-89.7A95 95 0 0 0 214 174c-16 9.7-35.6 15.5-59 15.5z" fill="#fff" />
+                                    <path d="M115.8 246.1a38.5 38.5 0 0 0 38.7 38.6 38.5 38.5 0 0 0 38.6-38.6 38.6 38.6 0 1 0-77.3 0z" fill="#3e4347" />
+                                    <path d="M131.6 241.1c3.2 3.2 9.9 1.7 14.9-3.2 4.8-4.8 6.2-11.5 3-14.7-3.3-3.4-10-2-14.9 2.9-4.9 5-6.4 11.7-3 15z" fill="#fff" />
+                                </svg>
+                                <svg class="rating-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <circle cx="256" cy="256" r="256" fill="#ffd93b" />
+                                    <path d="M512 256A256 256 0 0 1 56.7 416.7a256 256 0 0 0 360-360c58.1 47 95.3 118.8 95.3 199.3z" fill="#f4c534" />
+                                    <path d="M336.6 403.2c-6.5 8-16 10-25.5 5.2a117.6 117.6 0 0 0-110.2 0c-9.4 4.9-19 3.3-25.6-4.6-6.5-7.7-4.7-21.1 8.4-28 45.1-24 99.5-24 144.6 0 13 7 14.8 19.7 8.3 27.4z" fill="#3e4347" />
+                                    <path d="M276.6 244.3a79.3 79.3 0 1 1 158.8 0 79.5 79.5 0 1 1-158.8 0z" fill="#fff" />
+                                    <circle cx="340" cy="260.4" r="36.2" fill="#3e4347" />
+                                    <g fill="#fff">
+                                        <ellipse transform="rotate(-135 326.4 246.6)" cx="326.4" cy="246.6" rx="6.5" ry="10" />
+                                        <path d="M231.9 244.3a79.3 79.3 0 1 0-158.8 0 79.5 79.5 0 1 0 158.8 0z" />
+                                    </g>
+                                    <circle cx="168.5" cy="260.4" r="36.2" fill="#3e4347" />
+                                    <ellipse transform="rotate(-135 182.1 246.7)" cx="182.1" cy="246.7" rx="10" ry="6.5" fill="#fff" />
+                                </svg>
+                                <svg class="rating-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <circle cx="256" cy="256" r="256" fill="#ffd93b" />
+                                    <path d="M407.7 352.8a163.9 163.9 0 0 1-303.5 0c-2.3-5.5 1.5-12 7.5-13.2a780.8 780.8 0 0 1 288.4 0c6 1.2 9.9 7.7 7.6 13.2z" fill="#3e4347" />
+                                    <path d="M512 256A256 256 0 0 1 56.7 416.7a256 256 0 0 0 360-360c58.1 47 95.3 118.8 95.3 199.3z" fill="#f4c534" />
+                                    <g fill="#fff">
+                                        <path d="M115.3 339c18.2 29.6 75.1 32.8 143.1 32.8 67.1 0 124.2-3.2 143.2-31.6l-1.5-.6a780.6 780.6 0 0 0-284.8-.6z" />
+                                        <ellipse cx="356.4" cy="205.3" rx="81.1" ry="81" />
+                                    </g>
+                                    <ellipse cx="356.4" cy="205.3" rx="44.2" ry="44.2" fill="#3e4347" />
+                                    <g fill="#fff">
+                                        <ellipse transform="scale(-1) rotate(45 454 -906)" cx="375.3" cy="188.1" rx="12" ry="8.1" />
+                                        <ellipse cx="155.6" cy="205.3" rx="81.1" ry="81" />
+                                    </g>
+                                    <ellipse cx="155.6" cy="205.3" rx="44.2" ry="44.2" fill="#3e4347" />
+                                    <ellipse transform="scale(-1) rotate(45 454 -421.3)" cx="174.5" cy="188" rx="12" ry="8.1" fill="#fff" />
+                                </svg>
+                                <svg class="rating-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <circle cx="256" cy="256" r="256" fill="#ffd93b" />
+                                    <path d="M512 256A256 256 0 0 1 56.7 416.7a256 256 0 0 0 360-360c58.1 47 95.3 118.8 95.3 199.3z" fill="#f4c534" />
+                                    <path d="M232.3 201.3c0 49.2-74.3 94.2-74.3 94.2s-74.4-45-74.4-94.2a38 38 0 0 1 74.4-11.1 38 38 0 0 1 74.3 11.1z" fill="#e24b4b" />
+                                    <path d="M96.1 173.3a37.7 37.7 0 0 0-12.4 28c0 49.2 74.3 94.2 74.3 94.2C80.2 229.8 95.6 175.2 96 173.3z" fill="#d03f3f" />
+                                    <path d="M215.2 200c-3.6 3-9.8 1-13.8-4.1-4.2-5.2-4.6-11.5-1.2-14.1 3.6-2.8 9.7-.7 13.9 4.4 4 5.2 4.6 11.4 1.1 13.8z" fill="#fff" />
+                                    <path d="M428.4 201.3c0 49.2-74.4 94.2-74.4 94.2s-74.3-45-74.3-94.2a38 38 0 0 1 74.4-11.1 38 38 0 0 1 74.3 11.1z" fill="#e24b4b" />
+                                    <path d="M292.2 173.3a37.7 37.7 0 0 0-12.4 28c0 49.2 74.3 94.2 74.3 94.2-77.8-65.7-62.4-120.3-61.9-122.2z" fill="#d03f3f" />
+                                    <path d="M411.3 200c-3.6 3-9.8 1-13.8-4.1-4.2-5.2-4.6-11.5-1.2-14.1 3.6-2.8 9.7-.7 13.9 4.4 4 5.2 4.6 11.4 1.1 13.8z" fill="#fff" />
+                                    <path d="M381.7 374.1c-30.2 35.9-75.3 64.4-125.7 64.4s-95.4-28.5-125.8-64.2a17.6 17.6 0 0 1 16.5-28.7 627.7 627.7 0 0 0 218.7-.1c16.2-2.7 27 16.1 16.3 28.6z" fill="#3e4347" />
+                                    <path d="M256 438.5c25.7 0 50-7.5 71.7-19.5-9-33.7-40.7-43.3-62.6-31.7-29.7 15.8-62.8-4.7-75.6 34.3 20.3 10.4 42.8 17 66.5 17z" fill="#e24b4b" />
+                                </svg>
+                                <svg class="rating-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <g fill="#ffd93b">
+                                        <circle cx="256" cy="256" r="256" />
+                                        <path d="M512 256A256 256 0 0 1 56.8 416.7a256 256 0 0 0 360-360c58 47 95.2 118.8 95.2 199.3z" />
+                                    </g>
+                                    <path d="M512 99.4v165.1c0 11-8.9 19.9-19.7 19.9h-187c-13 0-23.5-10.5-23.5-23.5v-21.3c0-12.9-8.9-24.8-21.6-26.7-16.2-2.5-30 10-30 25.5V261c0 13-10.5 23.5-23.5 23.5h-187A19.7 19.7 0 0 1 0 264.7V99.4c0-10.9 8.8-19.7 19.7-19.7h472.6c10.8 0 19.7 8.7 19.7 19.7z" fill="#e9eff4" />
+                                    <path d="M204.6 138v88.2a23 23 0 0 1-23 23H58.2a23 23 0 0 1-23-23v-88.3a23 23 0 0 1 23-23h123.4a23 23 0 0 1 23 23z" fill="#45cbea" />
+                                    <path d="M476.9 138v88.2a23 23 0 0 1-23 23H330.3a23 23 0 0 1-23-23v-88.3a23 23 0 0 1 23-23h123.4a23 23 0 0 1 23 23z" fill="#e84d88" />
+                                    <g fill="#38c0dc">
+                                        <path d="M95.2 114.9l-60 60v15.2l75.2-75.2zM123.3 114.9L35.1 203v23.2c0 1.8.3 3.7.7 5.4l116.8-116.7h-29.3z" />
+                                    </g>
+                                    <g fill="#d23f77">
+                                        <path d="M373.3 114.9l-66 66V196l81.3-81.2zM401.5 114.9l-94.1 94v17.3c0 3.5.8 6.8 2.2 9.8l121.1-121.1h-29.2z" />
+                                    </g>
+                                    <path d="M329.5 395.2c0 44.7-33 81-73.4 81-40.7 0-73.5-36.3-73.5-81s32.8-81 73.5-81c40.5 0 73.4 36.3 73.4 81z" fill="#3e4347" />
+                                    <path d="M256 476.2a70 70 0 0 0 53.3-25.5 34.6 34.6 0 0 0-58-25 34.4 34.4 0 0 0-47.8 26 69.9 69.9 0 0 0 52.6 24.5z" fill="#e24b4b" />
+                                    <path d="M290.3 434.8c-1 3.4-5.8 5.2-11 3.9s-8.4-5.1-7.4-8.7c.8-3.3 5.7-5 10.7-3.8 5.1 1.4 8.5 5.3 7.7 8.6z" fill="#fff" opacity=".2" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="component" id="commentComponent">
+                    <div class="component-header">
+                        <div class="component-icon">
+                            <!-- <svg fill="currentColor" opacity="1.0" baseProfile="full" width="24" height="24" viewBox="0 0 24.00 24.00"><path d="M19.999 18.998v-12h-16V19h16zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-16a2 2 0 0 1-2-2v-14a2 2 0 0 1 2-2h16zM13 17v-2h5v2h-5zm-3.42-3.99L5.57 9H8.4l3.302 3.302a1 1 0 0 1 0 1.415L8.418 17H5.59l3.99-3.99z" /></svg> -->
+                        </div>
+                        <div id="commentHeader" class="component-title">
+                            Comments
+                        </div>
+                        <div class="component-options">
+        
+                        </div>
+                        <div id="commentArrow" class="component-arrow">
+                            <svg viewBox="0 0 24 24" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" color="currentColor" width="24" height="24"><path d="M6 9L11.7874 14.7874V14.7874C11.9048 14.9048 12.0952 14.9048 12.2126 14.7874V14.7874L18 9"></path></svg>
+                        </div>
+                    </div>
+                    <div id="commentContent" class="component-content">
+                        <div class="comment-section">
+                            {% for comment in comments %}
+                            <div class="comment-box">
+                                <div class="left-content">
+                                    <div class="img-box">
+                                        <img src="{{comment.user.profile_image.url}}">
+                                    </div>
+                                    <!-- <div class="user-badge admin">
+                                        <div class="tooltiptext">
+                                            Admin
+                                        </div>
+                                        <svg width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z" /><path d="M14 5l-2-2-2 2-3-2v7c0 2.757 2.243 5 5 5s5-2.243 5-5V3l-3 2zm-2 8c-1.654 0-3-1.346-3-3h6c0 1.654-1.346 3-3 3zm0 6.94l3.433-3.433C14.412 16.182 13.259 16 12 16s-2.412.182-3.433.507L12 19.94zm-4.92-2.799C5.16 18.194 4 19.907 4 22v2h7v-2.939l-3.92-3.92zm9.84 0L13 21.061V24h7v-2c0-2.093-1.16-3.806-3.08-4.859z" fill="currentColor" /></svg>
+                                    </div> -->
+                                </div>
+                                <div class="right-content">
+                                    <div class="comment">
+                                        <div class="top-info">
+                                            <div class="user-info">
+                                                <div class="fullname"
+                                                style="color: {{comment.user.user_accent_color}};">
+                                                    {{comment.user.fullname}}
+                                                </div>
+                                                <div class="username">
+                                                    @{{comment.user.username}}
+                                                </div>
+                                            </div>
+                                            <div class="menu">
+                                                <svg fill="currentColor" opacity="1.0" viewBox="0 0 20 20"><path d="M10 8.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4zm0 3.6a2.2 2.2 0 1 0 0 4.402 2.2 2.2 0 0 0 0-4.402z"/></svg>
+                                            </div>
+                                        </div>
+                                        <div class="text">
+                                            {{comment.text}}
+                                        </div>
+                                    </div>
+                                    <div class="sub-info">
+                                        <div class="time">
+                                            {{comment.time_ago}}
+                                        </div>
+                                        <div>
+                                            reply
+                                        </div>
+                                        <a href="{% url 'like_comment' comment.id %}" id="like-comment-{{ comment.id }}" class="like-box" style="color: inherit; text-decoration: none;">
+                                            <div id="like-count-{{ comment.id }}" class="count">
+                                                {{ comment.likes.count }}
+                                            </div>
+                                            {% if request.user in comment.likes.all %}
+                                                <svg fill="#9B144E" opacity="1.0" width="512" height="512" viewBox="0 0 512 512"><path d="M359.385 80C319.966 80 277.171 97.599 256 132.8 234.83 97.599 192.034 80 152.615 80 83.647 80 32 123.238 32 195.779c0 31.288 12.562 71.924 40.923 105.657 28.359 33.735 45.229 51.7 100.153 88C228 425.738 256 432 256 432s28-6.262 82.924-42.564c54.923-36.3 71.794-54.265 100.153-88C467.438 267.703 480 227.067 480 195.779 480 123.238 428.353 80 359.385 80z" /></svg>
+                                            {% else %}
+                                                <svg fill="currentColor" opacity="1.0" width="512" height="512" viewBox="0 0 512 512"><path d="M359.385 80C319.966 80 277.171 97.599 256 132.8 234.83 97.599 192.034 80 152.615 80 83.647 80 32 123.238 32 195.779c0 31.288 12.562 71.924 40.923 105.657 28.359 33.735 45.229 51.7 100.153 88C228 425.738 256 432 256 432s28-6.262 82.924-42.564c54.923-36.3 71.794-54.265 100.153-88C467.438 267.703 480 227.067 480 195.779 480 123.238 428.353 80 359.385 80z" /></svg>
+                                            {% endif %}
+                                        </a>
+                                    </div>
+                                    {% if comment.replies.first %}
+                                    <div class="reply-box">
+                                        <div class="reply-line first"></div>
+                                        <div class="reply-line last"></div>
+                                        <div class="first-reply">
+                                            <div class="img-box">
+                                                <img src="{{comment.replies.first.user.profile_image.url}}">
+                                            </div>
+                                            <div class="text">
+                                                {{comment.replies.first.text}}
+                                            </div>
+                                        </div>
+                                        <div class="more-reply">
+                                            View {{comment.replies.count}} more replies...
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <form class="comment-form">
+                            <button class="tools">
+                                <svg fill="currentColor" opacity="1.0" width="24" height="24" viewBox="0 0 24 24"><path d="M9.984 3.984C11.062 3.984 12 4.922 12 6s-.938 2.016-2.016 2.016S8.015 7.078 8.015 6s.891-2.016 1.969-2.016zm4.032 4.032c1.078 0 1.969.891 1.969 1.969s-.891 2.016-1.969 2.016S12 11.063 12 9.985s.938-1.969 2.016-1.969zM18 12c1.078 0 2.016.938 2.016 2.016s-.938 1.969-2.016 1.969-2.016-.891-2.016-1.969S16.922 12 18 12zm-3.984 3.984c1.078 0 1.969.938 1.969 2.016s-.891 2.016-1.969 2.016S12 19.078 12 18s.938-2.016 2.016-2.016zM18 8.016c-1.078 0-2.016-.938-2.016-2.016S16.922 3.984 18 3.984s2.016.938 2.016 2.016S19.078 8.016 18 8.016zM6 15.984c1.078 0 2.016.938 2.016 2.016S7.078 20.016 6 20.016 3.984 19.078 3.984 18 4.922 15.984 6 15.984zm0-7.968c1.078 0 2.016.891 2.016 1.969S7.078 12.001 6 12.001s-2.016-.938-2.016-2.016S4.922 8.016 6 8.016zM9.984 12c1.078 0 2.016.938 2.016 2.016s-.938 1.969-2.016 1.969-1.969-.891-1.969-1.969S8.906 12 9.984 12z"/></svg>
+                            </button>
+                            <textarea id="comment_text" rows="1" cols="25" placeholder="Write a something" class="input"></textarea>
+                            <button id="addCommentBtn" type="submit">
+                                <svg fill="currentColor" opacity="1.0" width="24" height="24" viewBox="0 0 24 24"><path d="M2.016 21v-6.984l15-2.016-15-2.016V3l21 9z"/></svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <section class="third-section">
+                <div class="header">
+                    <div class="title">
+                        Chapters
+                    </div>
+                    <div class="action-box">
+                        <div class="action">
+                            <svg fill="currentColor" opacity="1.0" width="24" height="24" viewBox="0 0 24 24"><path d="M6 12.984v-1.969h12v1.969H6zM3 6h18v2.016H3V6zm6.984 12v-2.016h4.031V18H9.984z" /></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="chapters-box">
+                    <div class="chapter">
+                        <div class="chapter-num">001</div>
+                        <div class="desc-box">
+                            <div class="title">chapter 1</div>
+                            <div class="subtitle">Ch. 1089 - 1103 • 16 pages</div>
+                        </div>
+                    </div>
+                    <div class="chapter">
+                        <div class="chapter-num">002</div>
+                        <div class="desc-box">
+                            <div class="title">Chapter 2</div>
+                            <div class="subtitle">Ch. 1089 - 1103 • 16 pages</div>
+                        </div>
+                    </div>
+                    <div class="chapter">
+                        <div class="chapter-num">003</div>
+                        <div class="desc-box">
+                            <div class="title">Chapter 3</div>
+                            <div class="subtitle">Ch. 1089 - 1103 • 16 pages</div>
+                        </div>
+                    </div>
+                    <div class="chapter">
+                        <div class="chapter-num">004</div>
+                        <div class="desc-box">
+                            <div class="title">Chapter 4</div>
+                            <div class="subtitle">Ch. 1089 - 1103 • 16 pages</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="fab">
+                    <svg fill="currentColor" opacity="1.0" width="22" height="28" viewBox="0 0 22 28"><path d="M21.625 14.484L.875 26.015c-.484.266-.875.031-.875-.516v-23c0-.547.391-.781.875-.516l20.75 11.531c.484.266.484.703 0 .969z"/></svg>
+                    <p>Continue</p>
+                </div> -->
+            </section>
+        </div>
+        <div class="content-box">
+            <div class="swiper anime-section">
+                <div class="section-info">
+                    <div class="section-title">
+                        <div class="helper-box"></div>
+                        More Like This
+                    </div>
+                    <div class="section-seeall">
+                        See All >
+                    </div>
+                </div>
+                <div class="swiper-wrapper section-animes">
+                    <div class="swiper-slide">
+                        <div class="anime-box">
+                            <div class="img-box">
+                                <img src="./images/img2.jpg" alt="" />
+                            </div>
+                            <div class="name">
+                                Naruto Shippuden
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="anime-box">
+                            <div class="img-box">
+                                <img src="./images/img3.jpg" alt="" />
+                            </div>
+                            <div class="name">
+                                Naruto Shippuden
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="anime-box">
+                            <div class="img-box">
+                                <img src="./images/img1.jpg" alt="" />
+                            </div>
+                            <div class="name">
+                                Naruto Shippuden
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="anime-box">
+                            <div class="img-box">
+                                <img src="./images/img1.jpg" alt="" />
+                            </div>
+                            <div class="name">
+                                Naruto Shippuden
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static './libs/swiper-bundle.min.js' %}"></script>
+    <script>
+        var swiperScroll = new Swiper(".anime-section", {
+            slidesPerView: "auto",
+        });
+
+        const loadAnimeBoxes = () => {
+            const animeSections = document.querySelectorAll(".anime-section");
+            var timeRange = 150;
+            animeSections.forEach(function (section) {
+                const animeBoxes = section.querySelectorAll(".anime-box");
+                animeBoxes.forEach(function (box, index) {
+                    setTimeout(function () {
+                        box.classList.add("show-animation");
+                    }, index * timeRange);
+                });
+            });
+        }
+        loadAnimeBoxes();
+
+        const loadchapters = () => {
+            var chaptersBox = document.querySelector('.chapters-box');
+            const chapters = chaptersBox.querySelectorAll(".chapter");
+            var timeRange = 150;
+            chapters.forEach(function (chapter, index) {
+                setTimeout(function () {
+                    chapter.classList.add("animate");
+                }, index * timeRange);
+            });
+        }
+        loadchapters();
+    </script>
+    <script>
+        var swiper = new Swiper(".genres-box", {
+            slidesPerView: "auto",
+            freeMode: true,
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var descBox = document.querySelector('.second-section .desc-box');
+            var descContent = document.querySelector('.second-section .desc-box .content');
+
+            function adjustDescBoxHeight() {
+                // Açıklama kutusunun yüksekliğini içeriğin yüksekliğine göre ayarla
+                var descHeight = descContent.scrollHeight + 'px';
+                descBox.style.setProperty('--desc-active-height', descHeight);
+            }
+
+            window.addEventListener('resize', adjustDescBoxHeight);
+
+            descBox.addEventListener('click', function () {
+                descBox.classList.toggle("active");
+
+                // Açıklama kutusunu açtığınızda hemen yüksekliği ayarla
+                adjustDescBoxHeight();
+            });
+
+            // Sayfa yüklendiğinde açıklama kutusunun yüksekliğini ayarla
+            adjustDescBoxHeight();
+        });
+    </script>
+
+<script>
+function addBottomSheet(a) {
+        // Select DOM elements
+        const bottomSheet = document.querySelector(a);
+        const sheetContent = bottomSheet.querySelector('.component-content');
+        const dragIcon = bottomSheet.querySelector('.component-title');
+        const arrow = bottomSheet.querySelector('.component-arrow');
+        // Global variables for tracking drag events
+        let isDragging = false, startY, startHeight;
+
+        // Show the bottom sheet, hide body vertical scrollbar, and call updateSheetHeight
+        const showBottomSheet = () => {
+            bottomSheet.classList.add("show");
+            document.body.style.overflowY = "hidden";
+            updateSheetHeight(0);
+        }
+
+        const updateSheetHeight = (height) => {
+            sheetContent.style.height = `${height}vh`; //updates the height of the sheet content
+            // Toggles the fullscreen class to bottomSheet if the height is equal to 100
+            if (height != 0) {
+                arrow.style.transform = 'rotate(0deg)';
+                dragIcon.onclick = () => updateSheetHeight(0);
+            } else {
+                arrow.style.transform = 'rotate(180deg)';
+                dragIcon.onclick = () => updateSheetHeight(77.3);
+            }
+        }
+
+        // Hide the bottom sheet and show body vertical scrollbar
+        const hideBottomSheet = () => {
+            bottomSheet.classList.remove("show");
+            document.body.style.overflowY = "auto";
+        }
+
+        // Sets initial drag position, sheetContent height and add dragging class to the bottom sheet
+        const dragStart = (e) => {
+            isDragging = true;
+            startY = e.pageY || e.touches?.[0].pageY;
+            startHeight = parseInt(sheetContent.style.height);
+            bottomSheet.classList.add("dragging");
+        }
+
+        // Calculates the new height for the sheet content and call the updateSheetHeight function
+        const dragging = (e) => {
+            if (!isDragging) return;
+            document.body.style.cursor = "grabbing";
+            bottomSheet.querySelector('.component-header').style.cursor = "grabbing";
+            const delta = startY - (e.pageY || e.touches?.[0].pageY);
+            const newHeight = startHeight + delta / window.innerHeight * 100;
+            updateSheetHeight(newHeight);
+        }
+
+        // Determines whether to hide, set to fullscreen, or set to default
+        // height based on the current height of the sheet content
+        const dragStop = () => {
+            isDragging = false;
+            bottomSheet.classList.remove("dragging");
+            const sheetHeight = parseInt(sheetContent.style.height);
+            // sheetHeight < 25 ? updateSheetHeight(0): sheetHeight > 75 ? updateSheetHeight(77.3): updateSheetHeight(50);
+            sheetHeight < 40 ? updateSheetHeight(0): sheetHeight > 75 ? updateSheetHeight(77.3): updateSheetHeight(77.3);
+            document.body.style.cursor = "default";
+            bottomSheet.querySelector('.component-header').style.cursor = "grab";
+        }
+
+        dragIcon.addEventListener("touchstart", dragStart);
+        document.addEventListener("touchmove", dragging);
+        document.addEventListener("touchend", dragStop);
+        dragIcon.addEventListener("mousedown", dragStart);
+        document.addEventListener("mousemove", dragging);
+        document.addEventListener("mouseup", dragStop);
+        updateSheetHeight(0)
+    }
+
+    addBottomSheet("#commentComponent");
+</script>
+<script>
+    function getTopHalfHeight(element) {
+        var container = document.querySelector('.comment-section');
+        var elementTop = element.offsetTop - container.offsetTop + element.offsetHeight / 2;
+        //console.log('Elementin orta noktasının üstündeki yükseklik: ' + elementTop + 'px');
+        return elementTop - 8 + 'px';
+    }
+    setTimeout(function() {
+        var replies = document.querySelectorAll('.first-reply');
+        replies.forEach(reply => {
+            var line = reply.parentElement.querySelector('.reply-line.first');
+            line.style.height = getTopHalfHeight(reply)
+        });
+        var moreReplies = document.querySelectorAll('.more-reply');
+        moreReplies.forEach(reply => {
+            var line = reply.parentElement.querySelector('.reply-line.last');
+            line.style.height = getTopHalfHeight(reply)
+        });
+    }, 100);
+    var likeBoxes = document.querySelectorAll('.like-box');
+    likeBoxes.forEach(box => {
+        box.addEventListener('click', () => {
+            box.classList.toggle('active')
+        });
+    });
+    var comments = document.querySelectorAll('.comment');
+    comments.forEach(comment => {
+        comment.ondblclick = (e) => {
+            var likeBox = comment.parentElement.querySelector('.sub-info .like-box');
+            likeBox.click();
+        }
+    });
+    function toNumber(a) {
+        return ((a)*1)
+    }
+    function toString(a) {
+        return ((a)+"")
+    }
+    function rgbToHex(r, g, b) {
+        const toHex = (value) => {
+            const hex = value.toString(16);
+            return hex.length === 1 ? '0' + hex: hex;
+        };
+
+        const hexR = toHex(r);
+        const hexG = toHex(g);
+        const hexB = toHex(b);
+
+        return '#' + hexR + hexG + hexB;
+    }
+    function hexToRgb(hex) {
+        const cleanHex = hex.replace(/^#/, '');
+        const bigint = parseInt(cleanHex, 16);
+
+        const r = (bigint >> 16) & 255;
+        const g = (bigint >> 8) & 255;
+        const b = bigint & 255;
+
+        return {
+            r,
+            g,
+            b
+        };
+    }
+
+
+
+    /*
+    var userImages = document.querySelectorAll('.left-content .img-box img');
+    userImages.forEach(image => {
+        // Resmi HTML canvas elementine çiz
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext('2d');
+        image.onload = function() {
+            canvas.width = image.width;
+            canvas.height = image.height;
+            context.drawImage(image, 0, 0);
+
+            // Piksel verilerini al
+            var imageData = context.getImageData(0, 0, canvas.width, canvas.height).data;
+
+            // Renk sayımları için bir nesne oluştur
+            var colorCounts = {};
+
+            // Her dört değerlik pikseli (RGBA) incele
+            for (var i = 0; i < imageData.length; i += 4) {
+                var color = 'rgba(' + imageData[i] + ',' + imageData[i + 1] + ',' + imageData[i + 2] + ',' + imageData[i + 3] + ')';
+                if (colorCounts[color]) {
+                    colorCounts[color]++;
+                } else {
+                    colorCounts[color] = 1;
+                }
+            }
+
+            // Renk sayımlarını sırala
+            var sortedColors = Object.keys(colorCounts).sort(function(a, b) {
+                return colorCounts[b] - colorCounts[a];
+            });
+
+            // Tüm renkleri ayrıştır
+            var allColors = sortedColors.map(parseColor);
+
+            // Tüm renklerin ortalamasını al
+            var totalRed = 0,
+            totalGreen = 0,
+            totalBlue = 0;
+            for (var j = 0; j < allColors.length; j++) {
+                totalRed += allColors[j][0];
+                totalGreen += allColors[j][1];
+                totalBlue += allColors[j][2];
+            }
+
+            var averageRed = Math.round(totalRed / allColors.length);
+            var averageGreen = Math.round(totalGreen / allColors.length);
+            var averageBlue = Math.round(totalBlue / allColors.length);
+
+            var averageColor = 'rgb(' + averageRed + ',' + averageGreen + ',' + averageBlue + ')';
+
+            console.log('Tema Rengi: ' + averageColor);
+            var elem = image.parentElement.parentElement.parentElement
+            var name = elem.querySelector('.right-content .top-info .fullname');
+            var gradientString = 'linear-gradient(90deg, ' + sortedColors[0] + '30%, white)';
+            name.style.background = gradientString;
+            name.style.webkitBackgroundClip = 'text'; // Webkit tarayıcıları için gerekli
+            name.style.color = 'transparent';
+            console.log(name)
+            // Tema rengini kullanarak bir şeyler yapabilirsiniz
+            // Örneğin, arka plan rengini ayarla:
+            //document.body.style.backgroundColor = averageColor;
+        };
+
+        // Renk string'ini ayrıştırmak için yardımcı fonksiyon
+        function parseColor(colorString) {
+            var values = colorString.substring(5, colorString.length - 1).split(',');
+            return values.map(function (value) {
+                return parseInt(value);
+            });
+        }
+    });
+*/
+</script>
+<script>
+    $('#addCommentBtn').on('click', function (event) {
+    event.preventDefault();
+
+    var comment_text = $('#comment_text').val();
+
+    $.ajax({
+      type: 'GET',
+      url: "{% url 'add_comment' %}",
+      data: { text: comment_text, object_id: '{{manga.id}}', content_type: "manga" },
+      dataType: 'json',
+      success: function (data) {
+        console.log(data)
+        if (data.comment) {
+            var commentDiv = document.createElement('div');
+            commentDiv.classList.add('comment-box');
+            var comment_html = `<div class="left-content">
+                <div class="img-box">
+                    <img src="${data.profile_image}">
+                </div>
+                <div class="user-badge user">
+                    <div class="tooltiptext">
+                        User
+                    </div>
+                    <svg fill="currentColor" opacity="1.0" width="20" height="28" viewBox="0 0 20 28"><path d="M20 21.859C20 24.14 18.5 26 16.672 26H3.328C1.5 26 0 24.141 0 21.859 0 17.75 1.016 13 5.109 13a6.979 6.979 0 0 0 9.782 0C18.985 13 20 17.75 20 21.859zM16 8c0 3.313-2.688 6-6 6s-6-2.688-6-6 2.688-6 6-6 6 2.688 6 6z" /></svg>
+                </div>
+            </div>
+            <div class="right-content">
+                <div class="comment">
+                    <div class="top-info">
+                        <div class="fullname">
+                            ${data.fullname}
+                        </div>
+                        <div class="username">
+                            @${data.username}
+                        </div>
+                    </div>
+                    <div class="text">
+                        ${data.comment}
+                    </div>
+                </div>
+                <div class="sub-info">
+                    <div class="time">
+                        now
+                    </div>
+                </div>
+            </div>`;
+
+            commentDiv.innerHTML = comment_html;
+            var commentSection = document.querySelector('.comment-section');
+            commentSection.appendChild(commentDiv);
+            $('.comment-form').trigger('reset');
+
+        }
+      },
+      error: function (error) {
+        console.error('Error:', error);
+      }
+    });
+});
+
+
+    $(document).ready(function () {
+      $('.like-box').on('click', function (event) {
+        event.preventDefault();
+
+        var commentId = $(this).attr('href').split('/').pop();
+        var likeCountElement = $('#like-count-' + commentId);
+        var likeSvgElement = event.currentTarget.querySelector('svg');
+
+        $.ajax({
+          url: $(this).attr('href'),
+          type: 'POST',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}'
+          },
+          success: function (data) {
+            likeCountElement.text(data.count);
+            var clr = data.liked ? '#9B144E' : 'currentColor';
+            var likeSvg = `<svg fill="${clr}" opacity="1.0" width="512" height="512" viewBox="0 0 512 512"><path d="M359.385 80C319.966 80 277.171 97.599 256 132.8 234.83 97.599 192.034 80 152.615 80 83.647 80 32 123.238 32 195.779c0 31.288 12.562 71.924 40.923 105.657 28.359 33.735 45.229 51.7 100.153 88C228 425.738 256 432 256 432s28-6.262 82.924-42.564c54.923-36.3 71.794-54.265 100.153-88C467.438 267.703 480 227.067 480 195.779 480 123.238 428.353 80 359.385 80z" /></svg>`;
+            likeSvgElement.outerHTML = likeSvg;
+          },
+          error: function (error) {
+            console.error('Error:', error);
+          }
+        });
+      });
+
+      $('.comment').on('dblclick', function (event) {
+        var likeBox = event.currentTarget.parentElement.querySelector('.sub-info .like-box');
+        likeBox.click();
+      });
+
+
+    //   // for replies
+    //   $('.like-box.reply').on('click', function (event) {
+    //     event.preventDefault();
+
+    //     var commentId = $(this).attr('href').split('/').pop();
+    //     var likeCountElement = $('#like-count-' + commentId);
+    //     var likeSvgElement = event.currentTarget.querySelector('svg');
+
+    //     $.ajax({
+    //       url: $(this).attr('href'),
+    //       type: 'POST',
+    //       headers: {
+    //         'X-CSRFToken': '{{ csrf_token }}'
+    //       },
+    //       success: function (data) {
+    //         likeCountElement.text(data.count);
+    //         var clr = data.liked ? '#9B144E' : 'currentColor';
+    //         var likeSvg = `<svg fill="${clr}" opacity="1.0" width="512" height="512" viewBox="0 0 512 512"><path d="M359.385 80C319.966 80 277.171 97.599 256 132.8 234.83 97.599 192.034 80 152.615 80 83.647 80 32 123.238 32 195.779c0 31.288 12.562 71.924 40.923 105.657 28.359 33.735 45.229 51.7 100.153 88C228 425.738 256 432 256 432s28-6.262 82.924-42.564c54.923-36.3 71.794-54.265 100.153-88C467.438 267.703 480 227.067 480 195.779 480 123.238 428.353 80 359.385 80z" /></svg>`;
+    //         likeSvgElement.outerHTML = likeSvg;
+    //       },
+    //       error: function (error) {
+    //         console.error('Error:', error);
+    //       }
+    //     });
+    //   });
+    });
+</script>
+{% endblock %}

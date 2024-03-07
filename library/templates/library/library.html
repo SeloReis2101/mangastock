@@ -1,0 +1,284 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static './css/library.css' %}">
+    <link rel="stylesheet" href="{% static './css/partials/library-section.css' %}">
+    <link rel="stylesheet" href="{% static './css/partials/anime-section.css' %}">
+    <link rel="stylesheet" href="{% static './css/partials/slider.css' %}">
+    <style>
+        .anime-section .section-animes .anime-box:hover {
+            transform: scale(1.05);
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div class="main">
+        <div class="section-box">
+            <section class="first-section">
+                <!-- <img src="./images/one-piece.webp" class="random-image">
+                <div class="content">
+
+                </div> -->
+                <div class="swiper slider-container">
+                    <div class="swiper-wrapper">
+                        {% for manga in random_manga %}
+                        <div class="swiper-slide">
+                            <img class="image" src="{{manga.cover_image.url}}">
+                            <div class="content" style="align-items: center;">
+                                <div class="title">
+                                    {{manga.title}}
+                                </div>
+                                <div class="subtitle">
+                                    {{manga.short_desc}}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+            <section class="second-section">
+                <div class="header">
+                    <div class="title">
+                        Your Library
+                    </div>
+                    <div class="action-box">
+                        <!-- <div class="wrapper-dropdown">
+                            <span class="selected-display" id="destination">All Lists</span>
+                            <svg class="arrow" id="drp-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="transition-all ml-auto rotate-180">
+                              <path d="M7 14.5l5-5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <ul class="dropdown">
+                              <li class="item">Option 1</li>
+                              <li class="item">Option 2</li>
+                              <li class="item">Option 3</li>
+                              <li class="item">Option 4</li>
+                            </ul>
+                        </div> -->
+                        <div class="action">
+                            <svg fill="currentColor" opacity="1.0" width="24" height="24" viewBox="0 0 24 24"><path d="M6 12.984v-1.969h12v1.969H6zM3 6h18v2.016H3V6zm6.984 12v-2.016h4.031V18H9.984z" /></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="library-section">
+                    {% for library in libraries %}
+                    <div data-id="{{library.id}}" class="library" style="text-decoration: none; color: inherit;">
+                        <div class="covers">
+                            <div class="cover main">
+                                <img src="{{ library.mangas.all.0.cover_image.url }}">
+                            </div>
+                            <div class="cover child1">
+                                <img src="{{ library.mangas.all.1.cover_image.url }}">
+                            </div>
+                            <div class="cover child2">
+                                <img src="{{ library.mangas.all.2.cover_image.url }}">
+                            </div>
+                        </div>
+                        <div class="content">{{library.title}}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </div>
+
+<script>
+    const loadLibraryBoxes = () => {
+    var timeRange = 150;
+    const libraryBoxs = document.querySelectorAll(".library-section .library");
+    libraryBoxs.forEach(function (box, index) {
+        setTimeout(function () {
+            box.classList.add("animate");
+        }, index * timeRange);
+    });
+}
+loadLibraryBoxes();
+const loadAnimeBoxes = () => {
+            const animeSections = document.querySelectorAll(".anime-section");
+            var timeRange = 100;
+            animeSections.forEach(function (section) {
+                const animeBoxes = section.querySelectorAll(".anime-box");
+                animeBoxes.forEach(function (box, index) {
+                    setTimeout(function () {
+                        box.classList.add("show-animation");
+                    }, index * timeRange);
+                });
+            });
+        }
+        var swiperScroll = new Swiper(".anime-section", {
+            slidesPerView: "auto",
+        });
+</script>
+
+<script>
+    const libraryBoxs = document.querySelectorAll(".library-section .library");
+    
+    const toggleExpansion = (element, to, duration = 350) => {
+      return new Promise((res) => {
+        element.animate([
+          {
+        top: to.top,
+        left: to.left,
+        width: to.width,
+        height: to.height
+          }
+        ], {duration, fill: 'forwards', ease: 'ease-in'})
+        setTimeout(res, duration);
+      })
+    }
+
+    const fadeContent = (element, opacity, duration = 300) => {
+        return new Promise(res => {
+            [...element.children].forEach((child) => {
+                requestAnimationFrame(() => {
+                    child.style.transition = `opacity ${duration}ms linear`;
+                    child.style.opacity = opacity;
+                });
+            })
+            setTimeout(res, duration);
+        })
+    }
+
+    const getLibraryContent = (data, type) => {
+        var content = `
+            <div class="header">
+                <div class="title">
+                    ${data.title}
+                </div>
+                <div class="action-box">
+                </div>
+            </div>
+        `;
+        content += `
+        <div class="swiper anime-section">
+                <!--
+                <div class="section-info">
+                    <div class="section-title text" data-value="For You">
+                        <div class="helper-box"></div>
+                    </div>
+                    <div class="section-seeall">
+                        See All >
+                    </div>
+                </div>
+                style="display:grid;column-gap:10px;grid-template-columns:repeat(6, auto);width: 100%;height: 100%;"
+                -->
+                <div class="swiper-wrapper section-animes">`;
+        data.mangas.forEach(manga => {
+            content += `
+            <a class="swiper-slide" href="http://127.0.0.1:8000/manga/${manga.slug}" style="text-decoration: none; color: white;">
+                <div class="anime-box">
+                    <div class="img-box">
+                        <img src="${manga.cover_image}" alt="" />
+                    </div>
+                    <div class="name">
+                        ${manga.title}
+                    </div>
+                </div>
+            </a>`
+        });
+        content += `
+            </div>
+        </div>  `
+        return content;
+    }
+
+    const onCardClick = async (e, data) => {
+        const card = e.currentTarget;
+        // clone the card
+        const cardClone = card.cloneNode(true);
+        // get the location of the card in the view
+        const {top, left, width, height} = card.getBoundingClientRect();
+        // position the clone on top of the original
+        cardClone.style.position = 'fixed';
+        cardClone.style.zIndex = 5;
+        cardClone.style.top = top + 'px';
+        cardClone.style.left = left + 'px';
+        cardClone.style.width = width + 'px';
+        cardClone.style.height = height + 'px';
+        // hide the original card with opacity
+        card.style.opacity = '0';
+        cardClone.style.borderRadius = "40px";
+        // add card to the same container
+        card.parentNode.appendChild(cardClone);
+        // create a close button to handle the undo
+        const closeButton = document.createElement('div');
+        // position the close button top corner
+        closeButton.classList.add('action');
+        closeButton.style.rotate = "0deg";
+        closeButton.innerHTML = "X"
+        // closeButton.style = `
+        //     position: fixed;
+        //     z-index: 10000;
+        //     top: 35px;
+        //     right: 35px;
+        //     width: 35px;
+        //     height: 35px;
+        //     border-radius: 50%;
+        //     background-color: #e25656;
+        // `;
+        // attach click event to the close button
+        closeButton.addEventListener('click', async () => {
+            // remove the button on close
+            closeButton.remove();
+            // remove the display style so the original content is displayed right
+            cardClone.style.removeProperty('display');
+            cardClone.style.removeProperty('padding');
+            // show original card content
+            [...cardClone.children].forEach(child => child.style.removeProperty('display'));
+            fadeContent(cardClone, '0');
+            // shrink the card back to the original position and size
+            await toggleExpansion(cardClone, {top: `${top}px`, left: `${left}px`, width: `${width}px`, height: `${height}px`}, 300)
+            // show the original card again
+            card.style.removeProperty('opacity');
+            // remove the clone card
+            cardClone.remove();
+        });
+        // fade the content away
+        fadeContent(cardClone, '0')
+            .then(() => {
+                [...cardClone.children].forEach(child => child.style.display = 'none');
+            });
+        // expand the clone card
+        const sectionBox = document.querySelector('.section-box');
+        await toggleExpansion(cardClone, {top: `${sectionBox.offsetTop}px`, left: `${sectionBox.offsetLeft}px`, width: '1200px', height: '600px'});
+        const content = getLibraryContent(data, card.dataset.type)
+        // set the display block so the content will follow the normal flow in case the original card is not display block
+        cardClone.style.display = 'block';
+        //cardClone.style.padding = '0';
+        // append the close button after the expansion is done
+        cardClone.insertAdjacentHTML('afterbegin', content);
+        cardClone.querySelector('.header .action-box').appendChild(closeButton);
+        loadAnimeBoxes()
+    };
+</script>
+
+<script>
+$(document).ready(function () {
+  $('.library').on('click', function (event) {
+    event.preventDefault();
+
+    // var libraryID = $(this).attr('href').split('/').pop();
+    var libraryID = $(this).attr("data-id")
+
+    $.ajax({
+      type: 'GET',
+      url: "{% url 'view_library' %}",
+      data: { library_id: libraryID },
+      dataType: 'json',
+      success: function (data) {
+        console.log(data)
+        onCardClick(event, data);
+      },
+      error: function (error) {
+        console.error('Error:', error);
+      }
+    });
+  });
+});
+
+
+</script>
+    
+{% endblock %}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>notify</title>
+</head>
+<body>
+    <h1>Welcome to notify</h1>
+    <ul id="notify"></ul>
+    <script>
+        // setup chat scoket
+        const notifySocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/notify/'
+        );
+    
+        // on socket open
+        notifySocket.onopen = function (e) {
+            console.log('Socket successfully connected.');
+        };
+    
+        // on socket close
+        notifySocket.onclose = function (e) {
+            console.log('Socket closed unexpectedly', e);
+        };
+    
+        // on receiving message on group
+        notifySocket.onmessage = function (e) {
+            const data = JSON.parse(e.data);
+            const notification = data.notification;
+            console.log(notification)
+            // Call the setMessage function to add the new li element
+            setMessage(notification);
+    
+        };
+    
+        function setMessage(notification) {
+            // Create a new li element
+            var newLi = document.createElement('li');
+    
+            // Create a new anchor element
+            var newAnchor = document.createElement('a');
+            newAnchor.className = 'dropdown-item text-wrap';
+            newAnchor.href = '#';
+            newAnchor.textContent = notification;
+    
+            // Append the anchor element to the li element
+            newLi.appendChild(newAnchor);
+    
+            // Get the ul element with the id "notify"
+            var ulElement = document.getElementById('notify');
+    
+            // Append the new li element to the ul element
+            ulElement.appendChild(newLi);
+    
+            // getting object of count
+            // count = document.getElementById('bellCount').getAttribute('data-count');
+            // document.getElementById('bellCount').setAttribute('data-count', parseInt(count) + 1);
+        }
+        
+    </script>
+</body>
+</html>

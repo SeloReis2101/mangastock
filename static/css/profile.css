@@ -1,0 +1,175 @@
+.main .section-box .first-section {
+    overflow: hidden;
+    border-radius: 40px;
+}
+.main .section-box .first-section .profile-box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 5;
+}
+.main .section-box .first-section .profile-box .option {
+    position: absolute;
+    z-index: 5;
+    top: 25px;
+    width: 38px;
+    height: 38px;
+    background-color: rgba(255,255,255,0.1);
+    padding: 8px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.main .section-box .first-section .profile-box .option.settings {
+    right: 15px;
+}
+.main .section-box .first-section .profile-box .option.notification {
+    left: 15px;
+}
+.main .section-box .first-section .profile-box .option svg {
+    width: 100%;
+    height: 100%;
+}
+.main .section-box .first-section .profile-box .banner-box {
+    width: 100%;
+    height: 100%;
+}
+.main .section-box .first-section .profile-box .banner-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(150%);
+}
+.main .section-box .first-section .profile-box .content {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 25px;
+}
+.main .section-box .first-section .profile-box .content .profile-img-box {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 30px;
+    margin-top: 70px;
+}
+.main .section-box .first-section .profile-box .content .profile-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.main .section-box .first-section .profile-box .content .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main .section-box .first-section .profile-box .content .user-info .fullname {
+    font-size: 20px;
+}
+.main .section-box .first-section .profile-box .content .user-info .username {
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+}
+.main .section-box .first-section .profile-box .content .follow-btn {
+    margin-top: 30px;
+    padding: 5px 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.main .section-box .first-section .profile-box .content .roles {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5px;
+    padding: 5px 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.main .section-box .first-section .profile-box .content .roles .role {
+    width: 20px;
+    height: 20px;
+}
+.main .section-box .first-section .profile-box .content .info-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.main .section-box .first-section .profile-box .content .info-box .info-column {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    margin: 10px 15px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.main .section-box .first-section .profile-box .content .info-box .info-column .info-title {
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+}
+.main .section-box .first-section .profile-box .content .bio {
+    width: 90%;
+    text-align: center;
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+    padding: 10px 5px;
+    border-radius: 10px;
+}
+.main .section-box .first-section .profile-box .content .links-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 30px;
+}
+.main .section-box .first-section .profile-box .content .links-box .link {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    margin: 0 -15px;
+    transition: 0.5s;
+    transform: rotate(calc(var(--r) * 1deg));
+    display: grid;
+    place-items: center;
+    padding: 5px;
+    cursor: pointer;
+}
+.main .section-box .first-section .profile-box .content .links-box .link img {
+    width: 100%;
+    height: 100%;
+}
+.main .section-box .first-section .profile-box .content .links-box:hover .link {
+    transform: rotate(0deg);
+    margin: 5px;
+}
+
+.main .section-box .second-section {
+    transform: translate(-400px);
+    opacity: 0;
+    transition: 0.5s;
+    position: relative;
+    z-index: 4;
+}
+
+.main .section-box .third-section {
+    transform: translate(-400px);
+    opacity: 0;
+    transition: 0.5s;
+}

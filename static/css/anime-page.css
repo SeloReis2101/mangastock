@@ -1,0 +1,65 @@
+.content {
+    width: 100vw;
+}
+
+.anime-section {
+    padding: 10px;
+}
+.anime-section .section-info {
+    padding: 8px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    position: relative;
+}
+.anime-section .section-info .section-title {
+    position: absolute;
+    left: 8px;
+}
+.anime-section .section-info .section-seeall {
+    font-size: 14px;
+    color: #999;
+}
+.anime-section .section-animes {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    place-items: center;
+    gap: 10px;
+    width: 200px;
+    height: 260px;
+}
+.anime-section .section-animes .anime-box {
+    width: 160px;
+    height: 250px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    /*
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.5s, opacity 0.5s;*/
+}
+
+.anime-section .section-animes .anime-box.show-animation {
+    transform: translateX(0);
+    opacity: 1;
+}
+.anime-section .section-animes .anime-box .img-box {
+    width: 160px;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+    border: 0.5px solid #555;
+}
+.anime-section .section-animes .anime-box .img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.anime-section .section-animes .anime-box .name {
+    padding: 2px;
+    font-size: 13px;
+}

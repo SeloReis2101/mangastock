@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static './css/main.css' %}">
+    <link rel="stylesheet" href="{% static './css/partials/anime-section.css' %}">
+    <link rel="stylesheet" href="{% static './css/partials/slider.css' %}">
+{% endblock %}
+
+{% block body %}
+    <div class="main">
+        <div class="section-box">
+            <section class="first-section">
+                <div class="swiper slider-container">
+                    <div class="slider-helper"></div>
+                    <div class="swiper-wrapper">
+                        {% for manga in random_mangas %}
+                        <div class="swiper-slide">
+                            <img class="image" src="{{manga.cover_image.url}}">
+                            <div class="content">
+                                <div class="title">
+                                    {{manga.title}}
+                                </div>
+                                <div class="subtitle">
+                                    {{manga.short_desc}}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+            <section class="second-section">
+                <div class="swiper anime-section">
+                    <div class="section-info">
+                        <div class="section-title text" data-value="Popular">
+                            <div class="helper-box"></div>
+                        </div>
+                        <div class="section-seeall">
+                            See All >
+                        </div>
+                    </div>
+                    <div class="swiper-wrapper section-animes">
+                        {% for manga in all_mangas|dictsortreversed:"views_count" %}
+                        <a class="swiper-slide" href="{% url 'manga_detail' manga.slug %}" style="text-decoration: none; color: white;">
+                            <div class="anime-box">
+                                <div class="img-box">
+                                    <img src="{{manga.cover_image.url}}" alt="" />
+                                </div>
+                                <div class="name">
+                                    {{manga.title}}
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="swiper anime-section">
+                    <div class="section-info">
+                        <div class="section-title text" data-value="For You">
+                            <div class="helper-box"></div>
+                        </div>
+                        <div class="section-seeall">
+                            See All >
+                        </div>
+                    </div>
+                    <div class="swiper-wrapper section-animes">
+                        {% for manga in all_mangas %}
+                        <a class="swiper-slide" href="{% url 'manga_detail' manga.slug %}" style="text-decoration: none; color: white;">
+                            <div class="anime-box">
+                                <div class="img-box">
+                                    <img src="{{manga.cover_image.url}}" alt="" />
+                                </div>
+                                <div class="name">
+                                    {{manga.title}}
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+            <!-- <section class="third-section">
+                
+            </section> -->
+        </div>
+        <div class="content-box">
+            <div class="swiper anime-section">
+                <div class="section-info">
+                    <div class="section-title text" data-value="New Released">
+                        <div class="helper-box"></div>
+                    </div>
+                    <div class="section-seeall">
+                        See All >
+                    </div>
+                </div>
+                <div class="swiper-wrapper section-animes">
+                    {% for manga in all_mangas %}
+                        <a class="swiper-slide" href="{% url 'manga_detail' manga.slug %}" style="text-decoration: none; color: white;">
+                            <div class="anime-box">
+                                <div class="img-box">
+                                    <img src="{{manga.cover_image.url}}" alt="" />
+                                </div>
+                                <div class="name">
+                                    {{manga.title}}
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="swiper anime-section">
+                <div class="section-info">
+                    <div class="section-title text" data-value="Continue">
+                        <div class="helper-box"></div>
+                    </div>
+                    <div class="section-seeall">
+                        See All >
+                    </div>
+                </div>
+                <div class="swiper-wrapper section-animes">
+                    {% for manga in all_mangas %}
+                        <a class="swiper-slide" href="{% url 'manga_detail' manga.slug %}" style="text-decoration: none; color: white;">
+                            <div class="anime-box">
+                                <div class="img-box">
+                                    <img src="{{manga.cover_image.url}}" alt="" />
+                                </div>
+                                <div class="name">
+                                    {{manga.title}}
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static './libs/swiper-bundle.min.js' %}"></script>
+    <script>
+        var swiper = new Swiper(".slider-container", {
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".slider-helper",
+                clickable: true,
+                //dynamicBullets: true,
+            },
+            effect: "coverflow"
+        });
+        // swiper.on('transitionStart', () => {
+        //     var activeSlide = swiper.slides[swiper.realIndex];
+        //     console.log(getComputedStyle(activeSlide.querySelector('.content .subtitle')).height)
+        //     var subtitleHeight = activeSlide.querySelector('.content .subtitle').offsetHeight;
+        //     swiper.pagination.el.style.bottom = `${subtitleHeight + 40}px`;
+        // });
+        var swiperScroll = new Swiper(".anime-section", {
+            slidesPerView: "auto",
+        });
+
+        var sliderHelper = document.querySelector('.slider-helper');
+        var subtitle = document.querySelectorAll('.content .subtitle')[swiper.activeIndex]
+        // sliderHelper.style.bottom = ;
+        console.log(swiper)
+
+        const loadAnimeBoxes = () => {
+            const animeSections = document.querySelectorAll(".anime-section");
+            var timeRange = 200;
+            animeSections.forEach(function (section) {
+                const animeBoxes = section.querySelectorAll(".anime-box");
+                animeBoxes.forEach(function (box, index) {
+                    setTimeout(function () {
+                        box.classList.add("show-animation");
+                    }, index * timeRange);
+                });
+            });
+        }
+        loadAnimeBoxes();
+    </script>
+<script>
+    function startWriter() {
+        var allTexts = document.querySelectorAll('.text');
+        allTexts.forEach(elem => {
+            typeWriter(elem, 0);
+        });
+    }
+    
+    function typeWriter(elem, index) {
+        const text = elem.dataset.value;
+        if (index < text.length) {
+            elem.innerHTML += text.charAt(index);
+            index++;
+            setTimeout(function () {
+                typeWriter(elem, index);
+            }, 100);
+        }
+    }    
+    
+    window.onload = () => {
+        startWriter();
+    }
+</script>
+{% endblock %}

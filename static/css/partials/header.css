@@ -1,0 +1,43 @@
+.header {
+    /*
+    border-radius: 20px;
+    background: #222;
+    border: 0.5px solid #555;
+    */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    height: 50px;
+    margin: 10px;
+}
+.header .title {
+    padding-left: 15px;
+}
+.header .action-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header .action-box .action {
+    width: 35px;
+    height: 35px;
+    background: transparent;
+    border-radius: 15px;
+    rotate: 45deg;
+    display: grid;
+    place-items: center;
+    margin-right: 15px;
+    border: 1px solid var(--accent-color-1);
+    cursor: pointer;
+}
+.header .action-box .action:hover {
+    background: linear-gradient(to right, var(--accent-color-1), var(--accent-color-2));
+}
+.header .action-box .action svg {
+    rotate: -45deg;
+    width: 25px;
+    height: 25px;
+    display: grid;
+    place-items: center;
+}

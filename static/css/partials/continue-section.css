@@ -1,0 +1,95 @@
+.continue-section {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    row-gap: 20px;
+    place-items: center;
+}
+.continue-section .continue {
+    background: var(--accent-color-1);
+    width: 250px;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 20px;
+    position: relative;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: 0.5s;
+}
+.continue-section .continue.animate {
+    transform: translateX(0);
+    opacity: 1;
+}
+.continue-section .continue .left-content {}
+.continue-section .continue .left-content .img-box {
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.continue-section .continue .left-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.continue-section .continue .desc-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.continue-section .continue .desc-content .last-chapter {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+}
+.continue-section .continue .desc-content .name {
+    font-size: 18px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.continue-section .continue .desc-content .last-read {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+}
+.continue-section .continue .right-content {}
+.continue-section .continue .right-content button {
+    border: none;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(50px);
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    position: relative;
+}
+.continue-section .continue .right-content button svg {
+    color: white;
+    padding: 4px;
+}
+.continue-section .continue .right-content .helper-line {
+    position: absolute;
+    width: 40px; 
+    height: 37px;
+    right: 24px;
+}
+.continue-section .continue .right-content .helper-line.first {
+    top: 48px;
+    border-bottom-right-radius: 15px;
+    border: 3px solid rgba(255,255,255,0.1);
+    border-top: none;
+    border-left: none;
+}
+.continue-section .continue .right-content .helper-line.last {
+    bottom: 46px;
+    border-top-right-radius: 15px;
+    border: 3px solid rgba(255,255,255,0.1);
+    border-bottom: none;
+    border-left: none;
+}

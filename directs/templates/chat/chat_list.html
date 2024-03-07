@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Chat List</h1>
+    <ul>
+        {% for chat in chats %}
+            <li>
+                <img src="{{chat.user2.profile_image.url}}" width="50px" height="50px">
+                <a href="{% url 'chat_room' chat.id %}">{{ chat.user2.fullname }}</a>
+                {% if chat.messages.last.sender == request.user %}
+                    <small>You:{{chat.messages.last}}</small>
+                {% else %}
+                    <small>{{ chat.user2.fullname }}:{{chat.messages.last}}</small>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,118 @@
+/* the code below is for the dropdown menu */
+.wrapper-dropdown {
+    position: relative;
+    min-width: 200px;
+    max-width: 483px;
+    padding: 5px;
+    border-radius: 12px;
+    text-align: left;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background: rgba(0, 0, 0, 0.5); */
+    background: var(--accent-color-1);
+  }
+  /* .wrapper-dropdown:hover {
+    background: var(--accent-color-1);
+  }
+  .wrapper-dropdown.active {
+    background: var(--accent-color-1);
+  } */
+  
+  .scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+  }
+  
+  .arrow {
+    margin-left: 10px;
+    margin-right: 10px;
+    float: right;
+    rotate: 180deg;
+  }
+  
+  .selected-display {
+    margin-left: 20px;
+  }
+  
+  svg {
+    transition: all 0.3s;
+  }
+  
+  /* .wrapper-dropdown::before {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+  
+    margin-top: -2px;
+  
+    border-width: 6px 6px 0 6px;
+    border-style: solid;
+    border-color: #fff transparent;
+  } */
+  
+  .rotated {
+    transform: rotate(-180deg);
+  }
+  
+  .wrapper-dropdown .dropdown {
+    transition: 0.3s;
+  
+    position: absolute;
+    top: 120%;
+    right: 0;
+    left: 0;
+  
+    margin: 0;
+    padding: 0;
+  
+    list-style: none;
+  
+    z-index: 99;
+  
+    border-radius: 15px;
+    box-shadow: inherit;
+    background: inherit;
+    backdrop-filter: blur(5px);
+  
+    -webkit-transform-origin: top;
+    -moz-transform-origin: top;
+    -ms-transform-origin: top;
+    transform-origin: top;
+  
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .wrapper-dropdown .dropdown li {
+    padding: 10px 15px;
+    overflow: hidden;
+  }
+  
+  .wrapper-dropdown .dropdown li:last-child {
+    border-bottom: none;
+  }
+  
+  .dropdown {
+    padding: 0.5rem !important;
+  }
+  
+  .wrapper-dropdown .dropdown li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+  
+  .wrapper-dropdown.active .dropdown {
+    opacity: 1;
+    visibility: visible;
+  
+    border-radius: 15px;
+  }

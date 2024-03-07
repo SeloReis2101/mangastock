@@ -1,0 +1,92 @@
+@font-face {
+    font-family: 'Righteous';
+    src: url('../font_righteous.ttf');
+}
+*, body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body[data-theme="purple-theme"] {
+    --bg-color-1: #040637;
+    --bg-color-2: #3C0853;
+    --accent-color-1: #710455;
+    --accent-color-2: #910A68;
+}
+body[data-theme="green-theme"] {
+    --bg-color-1: #092634;
+    --bg-color-2: #1A4242;
+    --accent-color-1: #5D8374;
+    /* --accent-color-2: #58736b; */
+    --accent-color-2: #9ec8ba;
+}
+body[data-theme="brown-theme"] {
+    --bg-color-1: #3E3232;
+    --bg-color-2: #503C3D;
+    --accent-color-1: #7D6362;
+    --accent-color-2: #A87C7D;
+}
+body[data-theme="blue-theme"] {
+    --bg-color-1: #092646;
+    --bg-color-2: #144273;
+    --accent-color-1: #215295;
+    --accent-color-2: #2D74B4;
+}
+body[data-theme="maroon-theme"] {
+    --bg-color-1: #4D0034;
+    --bg-color-2: #790252;
+    --accent-color-1: #AF0172;
+    --accent-color-2: #E90F89;
+}
+body {
+    width: 100vw;
+    min-height: 100vh;
+    background: var(--bg-color-1);
+    color: white;
+    font-family: 'Righteous';
+    user-select: none;
+}
+body::-webkit-scrollbar {
+    display: none;
+}
+.main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main .section-box {
+    width: 1200px;
+    display: flex;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background: var(--bg-color-2);
+    border-radius: 40px;
+}
+.main .section-box section {
+    width: 400px;
+    height: 600px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 40px;
+}
+/* .main .section-box section:hover {
+    background: rgba(0, 0, 0, 0.3);
+} */
+.main .section-box section:nth-child(1) {
+    animation: anim1 1s;
+}
+.main .section-box section:nth-child(2) {
+    animation: anim1 1.5s;
+}
+.main .section-box section:nth-child(3) {
+    animation: anim1 2s;
+}
+@keyframes anim1 {
+    from {transform: translate(-400px);}
+    to {transform: translate(0px);}
+}
+
+.main .content-box {
+    width: 1200px;
+}
