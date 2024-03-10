@@ -81,7 +81,7 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'mangastock.wsgi.application'
+WSGI_APPLICATION = 'mangastock.wsgi.application'
 ASGI_APPLICATION = 'mangastock.asgi.application'
 
 CHANNEL_LAYERS = {
